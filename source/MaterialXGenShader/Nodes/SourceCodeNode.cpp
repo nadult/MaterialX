@@ -174,6 +174,10 @@ void SourceCodeNode::emitFunctionCall(const ShaderNode& node, GenContext& contex
 
             // Emit function name.
             shadergen.emitString(_functionName + "(", stage);
+            /*if (_functionName == "shpk_gltf_pbr_hook")
+            {
+                int a = 1;
+            }*/
 
             // Emit all inputs on the node.
             for (ShaderInput* input : node.getInputs())

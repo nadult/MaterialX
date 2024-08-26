@@ -100,12 +100,14 @@ class MX_CORE_API Value
     /// or FloatFormatDefault to set default format.
     static void setFloatFormat(FloatFormat format)
     {
+        printf("Set float format %d!\n", (int) format);
         _floatFormat = format;
     }
 
     /// Set float precision for converting values to strings.
     static void setFloatPrecision(int precision)
     {
+        printf("Set float prec %d!\n", precision);
         _floatPrecision = precision;
     }
 

@@ -108,8 +108,17 @@ template <class T> void dataToString(const T& data, string& str)
         std::ios_base::floatfield);
     ss.precision(Value::getFloatPrecision());
 
+    // char buffer[128];
+    // sprintf(buffer, "%f", data);
+    // str = buffer;
     ss << data;
     str = ss.str();
+
+    if (str == "0" && std::is_same<T, float>::value)
+    {
+        str = "0.0@@@";
+        printf("FUCKUP! %d %d\n", (int) fmt, (int) Value::getFloatPrecision());
+    }
 }
 
 template <> void dataToString(const bool& data, string& str)
