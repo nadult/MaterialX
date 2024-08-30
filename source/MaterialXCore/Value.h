@@ -32,6 +32,20 @@ using ConstValuePtr = shared_ptr<const Value>;
 
 template <class T> class TypedValue;
 
+struct FloatFormat
+{
+    /// Float formatting modes to use when converting values to strings.
+    enum Mode
+    {
+        ModeDefault = 0,
+        ModeFixed = 1,
+        ModeScientific = 2
+    };
+
+    Mode mode = ModeDefault;
+    int precision = 6;
+};
+
 /// @class ExceptionTypeError
 /// An exception that is thrown when a type mismatch is encountered.
 class MX_CORE_API ExceptionTypeError : public Exception
@@ -44,14 +58,6 @@ class MX_CORE_API ExceptionTypeError : public Exception
 class MX_CORE_API Value
 {
   public:
-    /// Float formats to use when converting values to strings.
-    enum FloatFormat
-    {
-        FloatFormatDefault = 0,
-        FloatFormatFixed = 1,
-        FloatFormatScientific = 2
-    };
-
   public:
     Value()
     {
@@ -94,32 +100,6 @@ class MX_CORE_API Value
 
     /// Return the value string for this value.
     virtual string getValueString() const = 0;
-
-    /// Set float formatting for converting values to strings.
-    /// Formats to use are FloatFormatFixed, FloatFormatScientific
-    /// or FloatFormatDefault to set default format.
-    static void setFloatFormat(FloatFormat format)
-    {
-        _floatFormat = format;
-    }
-
-    /// Set float precision for converting values to strings.
-    static void setFloatPrecision(int precision)
-    {
-        _floatPrecision = precision;
-    }
-
-    /// Return the current float format.
-    static FloatFormat getFloatFormat()
-    {
-        return _floatFormat;
-    }
-
-    /// Return the current float precision.
-    static int getFloatPrecision()
-    {
-        return _floatPrecision;
-    }
 
   protected:
     template <class T> friend class ValueRegistry;
